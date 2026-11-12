@@ -7,7 +7,7 @@
   <meta name="color-scheme" content="dark" />
   <meta
     name="description"
-    content="REKZ VIRTUAL — ruang interaksi dengan Rekz, AI companion virtual berkarakter 3D. Prototype demo tanpa API."
+    content="REKZ VIRTUAL — ruang interaksi dengan Rekz, AI companion virtual berkarakter 3D. Chat AI dengan karakter 3D."
   />
   <title>REKZ VIRTUAL — Virtual Companion</title>
 
@@ -325,14 +325,14 @@
             <div class="chat-identity">
               <span class="chat-avatar" aria-hidden="true">R</span>
               <div class="chat-identity__copy">
-                <h2 id="chatTitle">Rekz <span class="chat-live"><i aria-hidden="true"></i>SIMULASI</span></h2>
+                <h2 id="chatTitle">Rekz <span class="chat-live"><i aria-hidden="true"></i>AI</span></h2>
                 <p>Respons lokal · tanpa API</p>
               </div>
             </div>
             <div class="chat-head__actions">
-              <span class="demo-badge" title="Balasan berasal dari sistem simulasi lokal, bukan AI sungguhan">
+              <span class="demo-badge" title="Balasan dibuat oleh AI melalui server Rekz">
                 <span class="demo-badge__dot" aria-hidden="true"></span>
-                DEMO MODE — AI NOT CONNECTED
+                AI TERHUBUNG
               </span>
               <button type="button" class="icon-btn icon-btn--sm" id="clearChatBtn" aria-label="Bersihkan riwayat percakapan" title="Bersihkan percakapan">
                 <svg class="icon" aria-hidden="true"><use href="#i-trash"></use></svg>
@@ -375,7 +375,7 @@
 
           <p class="chat-disclaimer" id="chatDisclaimer">
             <span aria-hidden="true">●</span>
-            DEMO MODE — AI NOT CONNECTED. Balasan berasal dari skrip simulasi lokal, bukan model AI.
+            General Mode. Balasan dibuat oleh AI dan bisa keliru; periksa kembali hal penting.
           </p>
         </section>
       </section>
@@ -575,14 +575,14 @@
           <div><span>AI</span><strong>Tidak terhubung</strong></div>
         </div>
         <p class="hint">
-          Prototype visual. Balasan chat adalah simulasi lokal dan tidak dihasilkan oleh model AI.
+          Balasan chat dibuat oleh AI melalui server Rekz dan bisa keliru.
           Tidak ada backend, database, atau API key.
         </p>
       </section>
     </div>
 
     <div class="settings-dialog__foot">
-      <span class="settings-dialog__stamp">FRONTEND PROTOTYPE / 0.1.0</span>
+      <span class="settings-dialog__stamp">REKZ VIRTUAL / 0.2.0</span>
       <button type="button" class="primary-btn" id="doneSettingsBtn">Selesai</button>
     </div>
   </dialog>
