@@ -206,36 +206,6 @@
           </div>
         </div>
 
-        <section class="rail-section" aria-labelledby="expressionHeading">
-          <div class="rail-section__head">
-            <h2 class="eyebrow" id="expressionHeading">EKSPRESI WAJAH</h2>
-            <span class="mini-status" id="expressionStatus">5 / 5</span>
-          </div>
-          <div class="expression-grid" id="expressionGrid" role="group" aria-label="Pilih ekspresi wajah Rekz">
-            <button type="button" class="expression-btn is-active" data-expression="neutral" aria-pressed="true">
-              <svg class="expression-btn__icon" aria-hidden="true"><use href="#face-neutral"></use></svg>
-              <span>Neutral</span>
-            </button>
-            <button type="button" class="expression-btn" data-expression="happy" aria-pressed="false">
-              <svg class="expression-btn__icon" aria-hidden="true"><use href="#face-happy"></use></svg>
-              <span>Happy</span>
-            </button>
-            <button type="button" class="expression-btn" data-expression="sad" aria-pressed="false">
-              <svg class="expression-btn__icon" aria-hidden="true"><use href="#face-sad"></use></svg>
-              <span>Sad</span>
-            </button>
-            <button type="button" class="expression-btn" data-expression="angry" aria-pressed="false">
-              <svg class="expression-btn__icon" aria-hidden="true"><use href="#face-angry"></use></svg>
-              <span>Angry</span>
-            </button>
-            <button type="button" class="expression-btn expression-btn--wide" data-expression="surprised" aria-pressed="false">
-              <svg class="expression-btn__icon" aria-hidden="true"><use href="#face-surprised"></use></svg>
-              <span>Surprised</span>
-            </button>
-          </div>
-          <p class="hint" id="expressionHint">Rig wajah prosedural aktif. Ekspresi dirender langsung pada geometri 3D.</p>
-        </section>
-
         <section class="rail-section rail-section--features" aria-label="Status fitur avatar">
           <div class="feature-row"><span>Idle animation</span><span class="feature-state is-on" id="idleFeature">Aktif</span></div>
           <div class="feature-row"><span>Auto blink</span><span class="feature-state is-on" id="blinkFeature">Aktif</span></div>
@@ -386,36 +356,6 @@
           <span class="mini-status" id="renderPresetLabel">MEDIUM</span>
         </div>
 
-        <section class="rail-section" aria-labelledby="cameraHeading">
-          <div class="rail-section__head">
-            <h2 class="eyebrow" id="cameraHeading">KAMERA</h2>
-            <span class="mini-status">ORBIT</span>
-          </div>
-          <div class="camera-pad">
-            <button type="button" class="camera-btn" data-camera="rotate-left" aria-label="Putar kamera ke kiri">
-              <svg class="icon" aria-hidden="true"><use href="#i-orbit-left"></use></svg>
-              <span>Orbit kiri</span>
-            </button>
-            <button type="button" class="camera-btn" data-camera="rotate-right" aria-label="Putar kamera ke kanan">
-              <svg class="icon" aria-hidden="true"><use href="#i-orbit-right"></use></svg>
-              <span>Orbit kanan</span>
-            </button>
-            <button type="button" class="camera-btn" data-camera="zoom-in" aria-label="Perbesar tampilan avatar">
-              <svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg>
-              <span>Zoom in</span>
-            </button>
-            <button type="button" class="camera-btn" data-camera="zoom-out" aria-label="Perkecil tampilan avatar">
-              <svg class="icon" aria-hidden="true"><use href="#i-minus"></use></svg>
-              <span>Zoom out</span>
-            </button>
-          </div>
-          <button type="button" class="wide-btn wide-btn--quiet" data-camera="reset" aria-label="Reset kamera ke posisi awal">
-            <svg class="icon" aria-hidden="true"><use href="#i-reset"></use></svg>
-            Reset kamera
-          </button>
-          <p class="hint">Drag pada kanvas untuk orbit. Scroll atau pinch untuk zoom.</p>
-        </section>
-
         <section class="rail-section">
           <div class="rail-section__head">
             <h2 class="eyebrow">AUTO ROTATE</h2>
@@ -465,7 +405,7 @@
     <div class="settings-dialog__head">
       <div>
         <span class="eyebrow">REKZ VIRTUAL / V.02</span>
-        <h2 id="settingsTitle">Pengaturan</h2>
+        <h2 id="settingsTitle">Menu</h2>
       </div>
       <button type="button" class="icon-btn" id="closeSettingsBtn" aria-label="Tutup pengaturan">
         <svg class="icon" aria-hidden="true"><use href="#i-close"></use></svg>
@@ -473,6 +413,62 @@
     </div>
 
     <div class="settings-dialog__body">
+      <section class="settings-group settings-group--expressions" aria-labelledby="expressionHeading">
+        <div class="settings-group__head">
+          <h3 id="expressionHeading">Ekspresi wajah</h3>
+          <span class="mini-status" id="expressionStatus">5 / 5</span>
+        </div>
+        <div class="expression-grid" id="expressionGrid" role="group" aria-label="Pilih ekspresi wajah Rekz">
+          <button type="button" class="expression-btn is-active" data-expression="neutral" aria-pressed="true">
+            <svg class="expression-btn__icon" aria-hidden="true"><use href="#face-neutral"></use></svg>
+            <span>Neutral</span>
+          </button>
+          <button type="button" class="expression-btn" data-expression="happy" aria-pressed="false">
+            <svg class="expression-btn__icon" aria-hidden="true"><use href="#face-happy"></use></svg>
+            <span>Happy</span>
+          </button>
+          <button type="button" class="expression-btn" data-expression="sad" aria-pressed="false">
+            <svg class="expression-btn__icon" aria-hidden="true"><use href="#face-sad"></use></svg>
+            <span>Sad</span>
+          </button>
+          <button type="button" class="expression-btn" data-expression="angry" aria-pressed="false">
+            <svg class="expression-btn__icon" aria-hidden="true"><use href="#face-angry"></use></svg>
+            <span>Angry</span>
+          </button>
+          <button type="button" class="expression-btn expression-btn--wide" data-expression="surprised" aria-pressed="false">
+            <svg class="expression-btn__icon" aria-hidden="true"><use href="#face-surprised"></use></svg>
+            <span>Surprised</span>
+          </button>
+        </div>
+        <p class="hint" id="expressionHint">Rig wajah prosedural aktif. Ekspresi dirender langsung pada geometri 3D.</p>
+      </section>
+
+      <section class="settings-group settings-group--camera" aria-labelledby="cameraHeading">
+        <div class="settings-group__head">
+          <h3 id="cameraHeading">Kamera</h3>
+          <span class="mini-status">ORBIT</span>
+        </div>
+        <div class="camera-pad">
+          <button type="button" class="camera-btn" data-camera="rotate-left" aria-label="Putar kamera ke kiri">
+            <svg class="icon" aria-hidden="true"><use href="#i-orbit-left"></use></svg>
+            <span>Orbit kiri</span>
+          </button>
+          <button type="button" class="camera-btn" data-camera="rotate-right" aria-label="Putar kamera ke kanan">
+            <svg class="icon" aria-hidden="true"><use href="#i-orbit-right"></use></svg>
+            <span>Orbit kanan</span>
+          </button>
+          <button type="button" class="camera-btn" data-camera="zoom-in" aria-label="Perbesar tampilan avatar">
+            <svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg>
+            <span>Zoom in</span>
+          </button>
+          <button type="button" class="camera-btn" data-camera="zoom-out" aria-label="Perkecil tampilan avatar">
+            <svg class="icon" aria-hidden="true"><use href="#i-minus"></use></svg>
+            <span>Zoom out</span>
+          </button>
+        </div>
+        <p class="hint">Drag pada kanvas untuk orbit. Scroll atau pinch untuk zoom.</p>
+      </section>
+
       <section class="settings-group" aria-labelledby="settingsAudio">
         <div class="settings-group__head">
           <h3 id="settingsAudio">Audio</h3>
