@@ -3078,3 +3078,81 @@ svg {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 6px;
 }
+
+
+/* ---------------------------------------------------------
+   0.2 — Chat tanpa kotak: tidak ada garis pembatas, panel
+   memudar halus ke latar sehingga terasa menyatu dengan avatar.
+   --------------------------------------------------------- */
+.stage {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.chat-panel {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 0;
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+  box-shadow: none;
+  background: linear-gradient(
+    180deg,
+    rgba(3, 7, 14, 0) 0%,
+    rgba(3, 7, 14, 0.5) 16%,
+    rgba(3, 7, 14, 0.74) 42%,
+    rgba(3, 7, 14, 0.86) 100%
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 34px);
+  mask-image: linear-gradient(180deg, transparent 0, #000 34px);
+}
+
+.chat-panel::before {
+  display: none;
+}
+
+.chat-head {
+  border-bottom: 0;
+  padding-top: 24px;
+}
+
+.message__bubble {
+  border-color: transparent;
+}
+
+.message--rekz .message__bubble {
+  background: rgba(20, 40, 70, 0.55);
+}
+
+.message--user .message__bubble {
+  border-color: transparent;
+}
+
+.composer {
+  border-color: rgba(161, 199, 255, 0.14);
+  background: rgba(2, 7, 14, 0.5);
+}
+
+.composer:focus-within {
+  border-color: rgba(92, 157, 255, 0.4);
+}
+
+@media (max-width: 700px) {
+  .chat-panel {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 0 0 18px 18px;
+    background: linear-gradient(
+      180deg,
+      rgba(3, 7, 14, 0) 0%,
+      rgba(3, 7, 14, 0.62) 14%,
+      rgba(3, 7, 14, 0.82) 40%,
+      rgba(3, 7, 14, 0.92) 100%
+    );
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+}
