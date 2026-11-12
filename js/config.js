@@ -12,8 +12,8 @@ const smallScreen = window.matchMedia('(max-width: 700px)').matches;
 export const CONFIG = Object.freeze({
   app: {
     name: 'Rekz Virtual',
-    version: '0.1.0',
-    build: 'PROTOTYPE / CHAMBER 01',
+    version: '0.2.0',
+    build: 'CHAMBER 01 / AI CHAT',
     storageKey: 'rekz-virtual:v1',
   },
 
@@ -35,11 +35,16 @@ export const CONFIG = Object.freeze({
     defaultQuality: smallScreen || coarsePointer ? 'low' : 'medium',
   },
 
+  api: {
+    /** Supabase Edge Function "rekz-chat" (General Mode, tanpa login). */
+    chatUrl: 'https://xkqndsraohbvzkktobxt.supabase.co/functions/v1/rekz-chat',
+    timeoutMs: 30000,
+  },
+
   chat: {
-    typingDelayMin: 650,
-    typingDelayMax: 1250,
     maxInputLength: 500,
     maxMessages: 120,
+    maxHistory: 12,
   },
 
   ui: {
