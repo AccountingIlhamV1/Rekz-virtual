@@ -3035,3 +3035,46 @@ svg {
     font-size: 13.5px;
   }
 }
+
+
+/* ---------------------------------------------------------
+   0.2 — Satu menu: ekspresi + kamera + pengaturan ada di dialog
+   "Menu"; panel kanan disembunyikan, panel kiri dipersempit.
+   --------------------------------------------------------- */
+.rail--right {
+  display: none;
+}
+
+@media (min-width: 1181px) {
+  .workspace {
+    grid-template-columns: 156px minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .rail--left .persona__name {
+    font-size: 40px;
+  }
+}
+
+.settings-group--expressions .expression-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.settings-group--expressions .expression-btn {
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  min-height: 58px;
+  padding: 6px 2px;
+  text-align: center;
+}
+
+.settings-group--expressions .expression-btn--wide {
+  grid-column: auto;
+}
+
+.settings-group--camera .camera-pad {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+}
