@@ -296,7 +296,7 @@
               <span class="chat-avatar" aria-hidden="true">R</span>
               <div class="chat-identity__copy">
                 <h2 id="chatTitle">Rekz <span class="chat-live"><i aria-hidden="true"></i>AI</span></h2>
-                <p>Teman virtual · General Mode</p>
+                <p id="chatModeLabel">Teman virtual · General Mode</p>
               </div>
             </div>
             <div class="chat-head__actions">
@@ -345,7 +345,7 @@
 
           <p class="chat-disclaimer" id="chatDisclaimer">
             <span aria-hidden="true">●</span>
-            General Mode. Balasan dibuat oleh AI dan bisa keliru; periksa kembali hal penting.
+            Balasan dibuat oleh AI dan bisa keliru; periksa kembali hal penting.
           </p>
         </section>
       </section>
@@ -441,6 +441,29 @@
           </button>
         </div>
         <p class="hint" id="expressionHint">Rig wajah prosedural aktif. Ekspresi dirender langsung pada geometri 3D.</p>
+      </section>
+
+      <section class="settings-group settings-group--account" aria-labelledby="authHeading">
+        <div class="settings-group__head">
+          <h3 id="authHeading">Akun Papa</h3>
+          <span class="mini-status" id="authStatus">BELUM MASUK</span>
+        </div>
+        <form id="authForm" class="auth-form" autocomplete="on">
+          <div id="authFields" class="auth-fields">
+            <label class="auth-field">
+              <span>Email</span>
+              <input type="email" id="authEmail" name="email" autocomplete="username" inputmode="email" maxlength="200">
+            </label>
+            <label class="auth-field">
+              <span>Password</span>
+              <input type="password" id="authPassword" name="password" autocomplete="current-password" maxlength="200">
+            </label>
+          </div>
+          <button type="submit" class="auth-btn" id="authLoginBtn">Masuk</button>
+          <button type="button" class="auth-btn auth-btn--ghost" id="authLogoutBtn" hidden>Keluar</button>
+          <p class="hint" id="authMessage" role="status" aria-live="polite"></p>
+        </form>
+        <p class="hint">Login hanya untuk pemilik. Pengunjung umum tidak perlu masuk dan tetap bisa mengobrol di General Mode.</p>
       </section>
 
       <section class="settings-group settings-group--camera" aria-labelledby="cameraHeading">
@@ -578,7 +601,7 @@
     </div>
 
     <div class="settings-dialog__foot">
-      <span class="settings-dialog__stamp">REKZ VIRTUAL / 0.2.0</span>
+      <span class="settings-dialog__stamp">REKZ VIRTUAL / 0.2.2</span>
       <button type="button" class="primary-btn" id="doneSettingsBtn">Selesai</button>
     </div>
   </dialog>
