@@ -3156,3 +3156,74 @@ svg {
     -webkit-backdrop-filter: blur(6px);
   }
 }
+
+
+/* ---------------------------------------------------------
+   0.2.2 — Akun Papa (form login di Menu) + penanda Papa Mode
+   --------------------------------------------------------- */
+.auth-form {
+  display: grid;
+  gap: 10px;
+}
+
+.auth-fields {
+  display: grid;
+  gap: 10px;
+}
+
+.auth-fields[hidden],
+.auth-btn[hidden] {
+  display: none;
+}
+
+.auth-field {
+  display: grid;
+  gap: 4px;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--text-dim, rgba(214, 226, 247, 0.7));
+}
+
+.auth-field input {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid rgba(161, 199, 255, 0.16);
+  border-radius: 12px;
+  background: rgba(2, 7, 14, 0.55);
+  color: inherit;
+  font: inherit;
+  font-size: 14px;
+}
+
+.auth-field input:focus {
+  outline: none;
+  border-color: rgba(92, 157, 255, 0.55);
+}
+
+.auth-btn {
+  padding: 12px 14px;
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #3a78ff, #2559d6);
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.auth-btn:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.auth-btn--ghost {
+  border: 1px solid rgba(161, 199, 255, 0.22);
+  background: transparent;
+  color: inherit;
+}
+
+#chatModeLabel.is-papa {
+  color: #7fb2ff;
+  font-weight: 600;
+}
