@@ -12,7 +12,7 @@ const smallScreen = window.matchMedia('(max-width: 700px)').matches;
 export const CONFIG = Object.freeze({
   app: {
     name: 'Rekz Virtual',
-    version: '0.2.0',
+    version: '0.2.2',
     build: 'CHAMBER 01 / AI CHAT',
     storageKey: 'rekz-virtual:v1',
   },
@@ -33,6 +33,12 @@ export const CONFIG = Object.freeze({
     defaultDistance: 3.5,
     fov: 34,
     defaultQuality: smallScreen || coarsePointer ? 'low' : 'medium',
+  },
+
+  auth: {
+    /** Supabase Auth. Kunci di bawah adalah kunci PUBLIK (publishable), aman di frontend. */
+    url: 'https://xkqndsraohbvzkktobxt.supabase.co',
+    publishableKey: 'sb_publishable_C4LKRCqCtHmleQ84wd2Bfw_fqwUQq7y',
   },
 
   api: {
