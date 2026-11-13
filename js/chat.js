@@ -7,6 +7,7 @@
  */
 
 import { CONFIG } from './config.js';
+import { getAccessToken, clearSession, onAuthChange } from './auth.js';
 
 const GREETING =
   'Yo. Aku Rekz. Kamu datang tepat waktu — aku baru saja kehabisan hal menarik untuk dipikirkan. Mau mulai dari apa?';
@@ -14,6 +15,7 @@ const GREETING =
 const ERROR_NETWORK = 'Koneksi ke server gagal. Cek internetmu lalu coba kirim lagi.';
 const ERROR_TIMEOUT = 'Server terlalu lama menjawab. Coba kirim lagi sebentar lagi.';
 const ERROR_GENERIC = 'Rekz sedang tidak bisa menjawab. Coba lagi sebentar.';
+const ERROR_SESSION = 'Sesi login berakhir. Masuk lagi lewat Menu.';
 
 function formatTime(date) {
   const hours = String(date.getHours()).padStart(2, '0');
@@ -55,6 +57,8 @@ export class ChatDemo {
     this.sessionToken = 0;
     this.controller = null;
     this.typingEl = null;
+    this.modeLabel = document.getElementById('chatModeLabel');
+    this._unsubAuth = null;
     this.suggestionButtons = suggestions
       ? Array.from(suggestions.querySelectorAll('[data-prompt]'))
       : [];
@@ -79,6 +83,9 @@ export class ChatDemo {
       });
     });
 
+    this._unsubAuth = onAuthChange((loggedIn) => {
+      if (!loggedIn) this._setMode('general');
+    });
     this._onInput();
     // Sapaan awal hanya tampilan lokal; tidak masuk riwayat yang dikirim ke AI.
     this._appendMessage('rekz', GREETING);
@@ -92,7 +99,15 @@ export class ChatDemo {
     this.sessionToken += 1;
     if (this.controller) this.controller.abort();
     this.controller = null;
+    if (this._unsubAuth) this._unsubAuth();
     this._removeTyping();
+  }
+
+  _setMode(mode) {
+    if (!this.modeLabel) return;
+    const papa = mode === 'papa';
+    this.modeLabel.textContent = papa ? 'Teman virtual · Papa Mode' : 'Teman virtual · General Mode';
+    this.modeLabel.classList.toggle('is-papa', papa);
   }
 
   clear({ focus = true } = {}) {
@@ -175,9 +190,19 @@ export class ChatDemo {
     let errorText = '';
 
     try {
+      // Token hanya ada jika Papa sudah masuk; server yang memutuskan mode.
+      let accessToken = null;
+      try {
+        accessToken = await getAccessToken();
+      } catch {
+        accessToken = null;
+      }
+      const headers = { 'Content-Type': 'application/json' };
+      if (accessToken) headers.Authorization = `Bearer ${accessToken}`;
+
       const response = await fetch(CONFIG.api.chatUrl, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         body: JSON.stringify({ messages: this.history.slice(-this.maxHistory) }),
         signal: controller.signal,
       });
@@ -190,11 +215,17 @@ export class ChatDemo {
       }
 
       if (!response.ok) {
-        errorText = (data && typeof data.error === 'string' && data.error) || ERROR_GENERIC;
+        if (response.status === 401 && accessToken) {
+          clearSession(); // token ditolak server: paksa masuk ulang
+          errorText = ERROR_SESSION;
+        } else {
+          errorText = (data && typeof data.error === 'string' && data.error) || ERROR_GENERIC;
+        }
       } else if (!data || typeof data.reply !== 'string' || !data.reply.trim()) {
         errorText = 'Rekz memberi jawaban kosong. Coba kalimat lain.';
       } else {
         reply = data.reply.trim();
+        this._setMode(data.mode);
       }
     } catch (error) {
       if (token !== this.sessionToken) return; // percakapan sudah dibersihkan
