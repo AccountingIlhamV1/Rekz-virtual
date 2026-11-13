@@ -1,8 +1,8 @@
 /**
  * REKZ VIRTUAL — application bootstrap
  * -------------------------------------------------
- * Wires the 3D stage, the local chat simulation and every UI control.
- * There is no backend, no API key, and no generated AI response here.
+ * Wires the 3D stage, the AI chat client and every UI control.
+ * Chat goes to the Supabase Edge Function "rekz-chat"; no API key lives here.
  */
 
 import { CONFIG } from './config.js';
@@ -90,7 +90,7 @@ const avatar = new AvatarStage({
         controls.setStatus('Rekz siap · model eksternal');
       } else if (!modelErrorShown) {
         controls.hideAvatarError();
-        controls.setStatus('Rekz siap · simulasi lokal');
+        controls.setStatus('Rekz siap · model prosedural');
       } else {
         controls.setStatus('Mode prosedural · model gagal dimuat', { warning: true });
       }

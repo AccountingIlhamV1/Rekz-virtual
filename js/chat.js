@@ -58,6 +58,9 @@ export class ChatDemo {
     this.controller = null;
     this.typingEl = null;
     this.modeLabel = document.getElementById('chatModeLabel');
+    this.modeMeta = document.getElementById('modeMeta');
+    this.aiBadge = document.getElementById('aiBadge');
+    this.aiBadgeText = document.getElementById('aiBadgeText');
     this._unsubAuth = null;
     this.suggestionButtons = suggestions
       ? Array.from(suggestions.querySelectorAll('[data-prompt]'))
@@ -103,11 +106,27 @@ export class ChatDemo {
     this._removeTyping();
   }
 
+  /** Satu-satunya penggerak label mode (header + kepala chat). Nilai selalu dari server. */
   _setMode(mode) {
-    if (!this.modeLabel) return;
     const papa = mode === 'papa';
-    this.modeLabel.textContent = papa ? 'Teman virtual · Papa Mode' : 'Teman virtual · General Mode';
-    this.modeLabel.classList.toggle('is-papa', papa);
+    if (this.modeLabel) {
+      this.modeLabel.textContent = papa ? 'Teman virtual · Papa Mode' : 'Teman virtual · General Mode';
+      this.modeLabel.classList.toggle('is-papa', papa);
+    }
+    if (this.modeMeta) {
+      this.modeMeta.textContent = papa ? 'PAPA MODE' : 'GENERAL MODE';
+      this.modeMeta.classList.toggle('is-papa', papa);
+    }
+  }
+
+  /** Status koneksi AI nyata: "online" setelah server menjawab, "offline" jika jaringan/server gagal. */
+  _setAi(state) {
+    if (!this.aiBadge || !this.aiBadgeText) return;
+    const online = state === 'online';
+    const offline = state === 'offline';
+    this.aiBadgeText.textContent = online ? 'AI TERHUBUNG' : offline ? 'AI TERPUTUS' : 'AI SIAP';
+    this.aiBadge.classList.toggle('is-online', online);
+    this.aiBadge.classList.toggle('is-offline', offline);
   }
 
   clear({ focus = true } = {}) {
@@ -206,6 +225,7 @@ export class ChatDemo {
         body: JSON.stringify({ messages: this.history.slice(-this.maxHistory) }),
         signal: controller.signal,
       });
+      this._setAi(response.status >= 500 ? 'offline' : 'online');
 
       let data = null;
       try {
@@ -229,6 +249,7 @@ export class ChatDemo {
       }
     } catch (error) {
       if (token !== this.sessionToken) return; // percakapan sudah dibersihkan
+      this._setAi('offline');
       errorText = timedOut ? ERROR_TIMEOUT : ERROR_NETWORK;
     } finally {
       window.clearTimeout(timer);

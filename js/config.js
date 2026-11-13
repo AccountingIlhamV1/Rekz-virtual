@@ -12,7 +12,7 @@ const smallScreen = window.matchMedia('(max-width: 700px)').matches;
 export const CONFIG = Object.freeze({
   app: {
     name: 'Rekz Virtual',
-    version: '0.2.2',
+    version: '0.2.3',
     build: 'CHAMBER 01 / AI CHAT',
     storageKey: 'rekz-virtual:v1',
   },
