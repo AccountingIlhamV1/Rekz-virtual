@@ -157,7 +157,7 @@
         <span class="status-dot" id="statusDot"></span>
         <span id="statusLabel">Menyiapkan Rekz</span>
         <span class="topbar__status-rule" aria-hidden="true"></span>
-        <span class="topbar__status-meta">GENERAL MODE</span>
+        <span class="topbar__status-meta" id="modeMeta">GENERAL MODE</span>
       </div>
 
       <div class="topbar__actions">
@@ -300,9 +300,9 @@
               </div>
             </div>
             <div class="chat-head__actions">
-              <span class="demo-badge" title="Balasan dibuat oleh AI melalui server Rekz">
+              <span class="demo-badge" id="aiBadge" title="Balasan dibuat oleh AI melalui server Rekz">
                 <span class="demo-badge__dot" aria-hidden="true"></span>
-                AI TERHUBUNG
+                <span id="aiBadgeText">AI SIAP</span>
               </span>
               <button type="button" class="icon-btn icon-btn--sm" id="clearChatBtn" aria-label="Bersihkan riwayat percakapan" title="Bersihkan percakapan">
                 <svg class="icon" aria-hidden="true"><use href="#i-trash"></use></svg>
@@ -585,17 +585,17 @@
       <section class="settings-group settings-group--about" aria-labelledby="settingsAbout">
         <div class="settings-group__head">
           <h3 id="settingsAbout">Tentang</h3>
-          <span class="mini-status">0.1.0</span>
+          <span class="mini-status">0.2.3</span>
         </div>
         <div class="about-grid">
           <div><span>Karakter</span><strong>Rekz / 18</strong></div>
           <div><span>Model</span><strong id="settingsModelInfo">Prosedural Three.js</strong></div>
           <div><span>Ekspresi</span><strong id="settingsExpressionInfo">5 / 5</strong></div>
-          <div><span>AI</span><strong>Tidak terhubung</strong></div>
+          <div><span>AI</span><strong>Via server Rekz</strong></div>
         </div>
         <p class="hint">
           Balasan chat dibuat oleh AI melalui server Rekz dan bisa keliru.
-          Tidak ada backend, database, atau API key.
+          Tidak ada API key atau data verifikasi di browser.
         </p>
       </section>
     </div>

@@ -1,14 +1,13 @@
-# REKZ VIRTUAL — 0.1.0
+# REKZ VIRTUAL — 0.2.3
 
-Prototype frontend interaktif: sebuah ruang digital dengan karakter 3D laki-laki
-bernama **Rekz**, panel ekspresi, kontrol kamera, pengaturan render, dan simulasi
-chat lokal. Dibuat murni dengan **HTML5, CSS3, dan JavaScript ES Modules** serta
-Three.js dari CDN. Tidak ada backend, database, API key, atau model AI yang
-terhubung.
+Ruang digital interaktif dengan karakter 3D laki-laki bernama **Rekz**, panel
+ekspresi, kontrol kamera, pengaturan render, dan chat AI. Frontend dibuat dengan
+**HTML5, CSS3, dan JavaScript ES Modules** serta Three.js dari CDN. Chat dikirim ke
+Supabase Edge Function `rekz-chat` (Gemini). Tidak ada API key atau data verifikasi
+di browser; mode (General/Papa) selalu diputuskan server.
 
-> **DEMO MODE — AI NOT CONNECTED**
-> Balasan chat berasal dari aturan kata kunci dan fallback lokal di browser.
-> Prototype ini tidak mengklaim sebagai AI sungguhan.
+> **Status UI mengikuti server:** label mode berasal dari respons server, dan badge
+> AI menunjukkan koneksi nyata (`AI SIAP` → `AI TERHUBUNG` / `AI TERPUTUS`).
 
 ---
 
@@ -23,9 +22,9 @@ terhubung.
 - Dukungan model **GLB eksternal** dengan progres pemuatan, normalisasi tinggi,
   animasi idle, deteksi morph target, fallback, dan penanganan error. Ekspresi
   hanya diaktifkan jika model benar-benar mendukungnya.
-- Chat simulasi lokal berbahasa Indonesia dengan kepribadian Rekz, timestamp,
+- Chat AI berbahasa Indonesia dengan kepribadian Rekz, timestamp,
   typing indicator, saran pertanyaan, batas input, dan riwayat dalam sesi.
-- Label demo yang terlihat jelas di header chat dan footer composer.
+- Label mode dan status AI yang mengikuti respons server di header dan kepala chat.
 - Suara UI sintetis berbasis WebAudio, tidak pernah autoplay, dan bisa dimatikan.
 - Tiga preset kualitas render (Low/Medium/High), penghitung FPS, mode layar penuh,
   panel pengaturan, reset aplikasi, dan penyimpanan preferensi di `localStorage`.
@@ -46,7 +45,7 @@ rekz-virtual/
 │  ├─ main.js          # bootstrap + wiring
 │  ├─ config.js        # konfigurasi pusat
 │  ├─ avatar.js        # scene, karakter prosedural, GLB, animasi
-│  ├─ chat.js          # simulasi chat lokal
+│  ├─ chat.js          # klien chat AI (Edge Function rekz-chat)
 │  └─ controls.js      # tombol, pengaturan, audio, persistensi
 └─ assets/
    ├─ favicon.svg
@@ -164,10 +163,11 @@ Tombol **Reset aplikasi** menghapus preferensi lokal dan memuat ulang halaman.
 Chat hanya tersimpan di memori sesi; memuat ulang halaman akan memulai percakapan
 baru.
 
-## Catatan demo & batasan yang disengaja
+## Catatan & batasan yang disengaja
 
-- **Tidak ada AI.** Tidak ada request ke OpenAI, server, atau layanan lain.
-- **Tidak ada backend/database.** Semua data preferensi disimpan di browser.
+- **Chat memakai AI lewat server Rekz.** Browser hanya mengirim pesan; kunci dan
+  verifikasi ada di server. Balasan AI bisa keliru.
+- **Preferensi tampilan** disimpan di browser (`localStorage`).
 - **Tidak ada autoplay audio.** Bunyi baru aktif setelah interaksi pengguna.
 - **Riwayat chat tidak persisten.** Halaman dimuat ulang = sesi baru.
 - **Foto/avatar bukan gambar 2D.** Karakter bawaan adalah mesh Three.js nyata.
@@ -186,7 +186,7 @@ baru.
 - [ ] Auto-rotate bisa dinyalakan/dimatikan dari tiga lokasi kontrol.
 - [ ] Lima ekspresi mengubah wajah karakter prosedural.
 - [ ] Chat mengirim pesan, menampilkan typing indicator, timestamp, dan balasan.
-- [ ] Label `DEMO MODE — AI NOT CONNECTED` terlihat.
+- [ ] Header dan kepala chat menampilkan mode yang sama (General/Papa); badge AI berubah ke `AI TERHUBUNG` setelah balasan pertama dan `AI TERPUTUS` saat server gagal.
 - [ ] Suara tidak aktif sebelum gesture pertama; toggle suara menyimpan preferensi.
 - [ ] Kualitas Low/Medium/High mengubah bayangan/DPR tanpa mematahkan layout.
 - [ ] FPS tampil/hilang sesuai switch.
@@ -204,4 +204,4 @@ baru.
 - Karakter, tekstur prosedural, ikon SVG, dan antarmuka dibuat khusus untuk
   prototype ini. Tidak ada aset model atau audio pihak ketiga yang disertakan.
 
-**REKZ VIRTUAL / PROTOTYPE 0.1** — dibuat sebagai demo frontend, bukan produk AI.
+**REKZ VIRTUAL 0.2.3**
