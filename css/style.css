@@ -1599,6 +1599,15 @@ svg {
   width: 4px;
   height: 4px;
   border-radius: 50%;
+  background: #7f8da3;
+}
+
+.demo-badge.is-online .demo-badge__dot {
+  background: #5fd39b;
+  box-shadow: 0 0 7px rgba(95, 211, 155, 0.6);
+}
+
+.demo-badge.is-offline .demo-badge__dot {
   background: var(--danger);
   box-shadow: 0 0 7px rgba(255, 112, 134, 0.65);
 }
@@ -3223,7 +3232,16 @@ svg {
   color: inherit;
 }
 
-#chatModeLabel.is-papa {
+#chatModeLabel.is-papa,
+.topbar__status-meta.is-papa {
   color: #7fb2ff;
   font-weight: 600;
+}
+
+.demo-badge.is-online {
+  color: #9fe3c0;
+}
+
+.demo-badge.is-offline {
+  color: #f0a8a8;
 }
