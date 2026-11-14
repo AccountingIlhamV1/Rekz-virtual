@@ -661,6 +661,27 @@
         attributeFilter: ['class', 'title'],
       });
     });
+
+    // Keyboard layout lebar (tablet landscape + desktop): keyboard menimpa halaman,
+    // tidak mendorong atau menggeser avatar. Di luar layout lebar tidak ada yang berubah.
+    const wideLayout = window.matchMedia('(orientation: landscape) and (min-width: 900px) and (min-height: 621px)');
+    const keyboard = navigator.virtualKeyboard;
+    if (keyboard) {
+      const applyOverlay = () => {
+        try {
+          keyboard.overlaysContent = wideLayout.matches;
+        } catch {
+          /* diabaikan: browser tanpa dukungan penuh */
+        }
+        if (!wideLayout.matches) document.documentElement.classList.remove('rk-kb-open');
+      };
+      applyOverlay();
+      wideLayout.addEventListener('change', applyOverlay);
+      keyboard.addEventListener('geometrychange', () => {
+        const open = wideLayout.matches && keyboard.boundingRect.height > 0;
+        document.documentElement.classList.toggle('rk-kb-open', open);
+      });
+    }
   </script>
 </body>
 </html>
