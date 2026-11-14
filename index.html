@@ -20,6 +20,7 @@
     rel="stylesheet"
   />
   <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/wide.css" />
 
   <script type="importmap">
     {
@@ -582,6 +583,28 @@
         </button>
       </section>
 
+      <section class="settings-group settings-group--persona" aria-labelledby="personaHeading" hidden>
+        <div class="settings-group__head">
+          <h3 id="personaHeading">Tentang Rekz</h3>
+          <span class="mini-status">VIRTUAL COMPANION</span>
+        </div>
+        <p class="persona-about__name">Rekz<span>.</span></p>
+        <p class="persona-about__meta">18 · LAKI-LAKI · SMA</p>
+        <p class="persona-about__line">Cerdas, kritis, santai — dan sedikit terlalu jahil.</p>
+        <div class="tag-row">
+          <span class="tag tag--sapphire">SAPPHIRE EYES</span>
+          <span class="tag">3D CHARACTER</span>
+        </div>
+        <div class="persona-about__features">
+          <div class="feature-row"><span>Idle animation</span><span class="feature-state" id="aboutIdle">Aktif</span></div>
+          <div class="feature-row"><span>Auto blink</span><span class="feature-state" id="aboutBlink">Aktif</span></div>
+          <div class="feature-row"><span>Sumber model</span><span class="feature-state" id="aboutModel">Prosedural</span></div>
+        </div>
+        <blockquote class="persona-quote">
+          <p>Tenang. Aku tidak akan menghakimi pertanyaanmu. Mungkin.</p>
+        </blockquote>
+      </section>
+
       <section class="settings-group settings-group--about" aria-labelledby="settingsAbout">
         <div class="settings-group__head">
           <h3 id="settingsAbout">Tentang</h3>
@@ -617,5 +640,27 @@
 
   <script type="module" src="./js/main.js"></script>
   <script type="module" src="./js/debug.js"></script>
+  <script type="module">
+    // Menyalin status fitur dari panel persona (tersembunyi) ke "Tentang Rekz" di Menu.
+    // Hanya membaca dan menyalin teks; tidak mengubah logika aplikasi.
+    [['idleFeature', 'aboutIdle'], ['blinkFeature', 'aboutBlink'], ['modelFeature', 'aboutModel']].forEach(([from, to]) => {
+      const source = document.getElementById(from);
+      const target = document.getElementById(to);
+      if (!source || !target) return;
+      const sync = () => {
+        target.textContent = source.textContent;
+        target.className = source.className;
+        target.title = source.title || '';
+      };
+      sync();
+      new MutationObserver(sync).observe(source, {
+        childList: true,
+        characterData: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['class', 'title'],
+      });
+    });
+  </script>
 </body>
 </html>
