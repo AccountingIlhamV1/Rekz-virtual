@@ -1,0 +1,253 @@
+/* =========================================================
+   REKZ VIRTUAL 0.3 — Tahap 2: layout tablet landscape + desktop
+   ---------------------------------------------------------
+   File ini TERISOLASI: semua aturan ada di dalam satu media query.
+   Di luar kondisi itu (ponsel, portrait, layar pendek) file ini
+   tidak melakukan apa pun, jadi tampilan mobile tidak berubah.
+   Untuk membatalkan: hapus <link> wide.css di index.html.
+
+   Kondisi layout lebar:
+   landscape + lebar minimal 900px + tinggi minimal 621px
+   (tinggi 620px ke bawah tetap memakai layout lama 0.1).
+   ========================================================= */
+
+@media (orientation: landscape) and (min-width: 900px) and (min-height: 621px) {
+  :root {
+    --rk-chat-w: 42vw;
+    --rk-gutter: clamp(20px, 2.6vw, 44px);
+    --rk-fs: clamp(14px, 0.55vw + 8px, 18px);
+    --rk-top: calc(var(--header-h) + var(--safe-top));
+  }
+
+  /* ---------- Rangka: semua elemen utama dilepas dari alur ---------- */
+
+  .app .topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding-left: var(--rk-gutter);
+    padding-right: var(--rk-gutter);
+    border-bottom: 0;
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    pointer-events: none;
+  }
+
+  .app .topbar > * {
+    pointer-events: auto;
+  }
+
+  .app .topbar__status {
+    background: rgba(6, 15, 28, 0.68);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .app .topbar__status-meta,
+  .app .topbar__status-rule,
+  .app .avatar-drawer-btn {
+    display: none;
+  }
+
+  .app .workspace {
+    display: block;
+    gap: 0;
+    padding: 0;
+  }
+
+  .app .workspace .rail,
+  .app .workspace .rail--left.is-open {
+    display: none;
+  }
+
+  .sheet-backdrop {
+    display: none;
+  }
+
+  .app .center {
+    position: static;
+    display: block;
+    width: auto;
+    max-width: none;
+    margin: 0;
+  }
+
+  /* ---------- Avatar: area kanan, tanpa kotak ---------- */
+
+  .app .center .stage {
+    position: fixed;
+    inset: 0 0 0 var(--rk-chat-w);
+    z-index: 1;
+    min-height: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: none;
+  }
+
+  .app .center .stage::before {
+    display: none;
+  }
+
+  .app .stage .stage__hud--top {
+    display: none;
+  }
+
+  .app .center .stage .stage__quick {
+    top: calc(var(--rk-top) + 8px);
+    right: var(--rk-gutter);
+    bottom: auto;
+    flex-direction: column;
+  }
+
+  /* ---------- Gradient gelap di belakang chat, memudar ke avatar ---------- */
+
+  .app .center::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: calc(var(--rk-chat-w) + 12vw);
+    z-index: 10;
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      rgba(3, 7, 14, 0.95) 0%,
+      rgba(3, 7, 14, 0.88) 55%,
+      rgba(3, 7, 14, 0.74) 78%,
+      rgba(3, 7, 14, 0) 100%
+    );
+  }
+
+  /* ---------- Chat: kolom kiri tanpa kotak, tanpa blur ---------- */
+
+  .app .center .chat-panel {
+    position: fixed;
+    top: var(--rk-top);
+    bottom: 0;
+    left: 0;
+    right: auto;
+    z-index: 20;
+    width: var(--rk-chat-w);
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    padding: 0 var(--rk-gutter) calc(10px + var(--safe-bottom));
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .app .chat-panel .chat-head {
+    padding: 8px 0 10px;
+    border-bottom: 0;
+  }
+
+  .app .chat-panel .chat-identity h2 {
+    font-size: calc(var(--rk-fs) * 1.4);
+  }
+
+  .app .chat-panel .chat-identity p {
+    font-size: calc(var(--rk-fs) * 0.78);
+  }
+
+  .app .chat-panel .chat-thread {
+    padding: 6px 8px 8px 0;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 22px);
+    mask-image: linear-gradient(180deg, transparent 0, #000 22px);
+  }
+
+  .app .chat-panel .message {
+    max-width: 94%;
+    margin-bottom: calc(var(--rk-fs) * 0.9);
+  }
+
+  .app .chat-panel .message__bubble {
+    padding: 0.7em 1em;
+    font-size: var(--rk-fs);
+    line-height: 1.65;
+  }
+
+  .app .chat-panel .message__meta,
+  .app .chat-panel .message__meta time {
+    font-size: calc(var(--rk-fs) * 0.72);
+  }
+
+  .app .chat-panel .chat-suggestions {
+    padding: 4px 0 8px;
+  }
+
+  .app .chat-panel .suggestion-chip {
+    min-height: 32px;
+    padding: 6px 12px;
+    font-size: calc(var(--rk-fs) * 0.8);
+  }
+
+  .app .chat-panel .composer {
+    margin: 0;
+  }
+
+  .app .chat-panel .composer textarea {
+    font-size: max(16px, var(--rk-fs));
+  }
+
+  .app .chat-panel .chat-disclaimer {
+    padding: 6px 0 0;
+    font-size: calc(var(--rk-fs) * 0.66);
+    text-align: left;
+  }
+
+  /* ---------- Menu: bagian "Tentang Rekz" (pindahan panel persona) ---------- */
+
+  .settings-group--persona[hidden] {
+    display: block !important;
+  }
+
+  .persona-about__name {
+    margin: 4px 0 4px;
+    font-family: var(--font-display);
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    color: var(--text);
+  }
+
+  .persona-about__name span {
+    color: var(--sapphire-bright);
+  }
+
+  .persona-about__meta {
+    color: var(--muted-2);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+  }
+
+  .persona-about__line {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .persona-about__features {
+    margin-top: 12px;
+  }
+
+  .persona-about__features .feature-row {
+    font-size: 11px;
+  }
+
+  .persona-about__features .feature-state {
+    font-size: 9px;
+  }
+}
