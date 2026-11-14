@@ -127,7 +127,7 @@
   .app .center .chat-panel {
     position: fixed;
     top: var(--rk-top);
-    bottom: 0;
+    bottom: env(keyboard-inset-height, 0px);
     left: 0;
     right: auto;
     z-index: 20;
@@ -249,5 +249,21 @@
 
   .persona-about__features .feature-state {
     font-size: 9px;
+  }
+
+  /* ---------- Keyboard (Tahap 3a) ----------
+     Skrip di index.html mengaktifkan navigator.virtualKeyboard.overlaysContent
+     hanya pada layout lebar. Keyboard lalu menimpa halaman tanpa menggeser atau
+     mengubah ukuran apa pun; hanya kolom chat yang naik lewat
+     env(keyboard-inset-height). Kelas rk-kb-open dipasang skrip saat keyboard tampil. */
+
+  html.rk-kb-open .app .chat-panel .chat-suggestions,
+  html.rk-kb-open .app .chat-panel .chat-disclaimer {
+    display: none;
+  }
+
+  html.rk-kb-open .settings-dialog {
+    bottom: env(keyboard-inset-height, 0px);
+    max-height: calc(100dvh - env(keyboard-inset-height, 0px) - 16px);
   }
 }
