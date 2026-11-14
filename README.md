@@ -1,4 +1,4 @@
-# REKZ VIRTUAL — 0.2.3
+# REKZ VIRTUAL — 0.2.4
 
 Ruang digital interaktif dengan karakter 3D laki-laki bernama **Rekz**, panel
 ekspresi, kontrol kamera, pengaturan render, dan chat AI. Frontend dibuat dengan
@@ -160,8 +160,9 @@ Semua pengaturan utama ada di `js/config.js`:
 - `EXPRESSIONS` untuk label ekspresi.
 
 Tombol **Reset aplikasi** menghapus preferensi lokal dan memuat ulang halaman.
-Chat hanya tersimpan di memori sesi; memuat ulang halaman akan memulai percakapan
-baru.
+Riwayat chat terpisah menurut mode: **General** tersimpan di `localStorage` perangkat
+ini, **Papa** tersimpan di server (tabel `chat_messages`) dan hanya dimuat saat server
+menyatakan Papa Mode aktif. Tombol bersihkan hanya mengosongkan tampilan.
 
 ## Catatan & batasan yang disengaja
 
@@ -169,7 +170,7 @@ baru.
   verifikasi ada di server. Balasan AI bisa keliru.
 - **Preferensi tampilan** disimpan di browser (`localStorage`).
 - **Tidak ada autoplay audio.** Bunyi baru aktif setelah interaksi pengguna.
-- **Riwayat chat tidak persisten.** Halaman dimuat ulang = sesi baru.
+- **Riwayat terpisah per mode.** General di perangkat ini; Papa di server dan tidak pernah ditulis ke browser. Logout tidak menghapus riwayat, tetapi mereset verifikasi Papa Mode.
 - **Foto/avatar bukan gambar 2D.** Karakter bawaan adalah mesh Three.js nyata.
 - **Fullscreen** mengandalkan Fullscreen API; browser yang tidak mendukung akan
   menampilkan pesan yang jujur, bukan tombol palsu.
@@ -204,4 +205,4 @@ baru.
 - Karakter, tekstur prosedural, ikon SVG, dan antarmuka dibuat khusus untuk
   prototype ini. Tidak ada aset model atau audio pihak ketiga yang disertakan.
 
-**REKZ VIRTUAL 0.2.3**
+**REKZ VIRTUAL 0.2.4**
