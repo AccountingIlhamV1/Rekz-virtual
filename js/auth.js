@@ -1,5 +1,5 @@
 /**
- * REKZ VIRTUAL 0.2.2 — login akun (Supabase Auth, email + password)
+ * REKZ VIRTUAL 0.2.4 — login akun (Supabase Auth, email + password)
  * -------------------------------------------------
  * Tanpa library. Hanya memakai kunci PUBLIK (publishable key).
  * Password tidak pernah disimpan; yang disimpan hanya token sesi.
@@ -147,7 +147,28 @@ export async function login(email, password) {
   }
 }
 
+/**
+ * Keluar. Server diminta mereset masa aktif Papa Mode lebih dulu (login berikutnya harus verifikasi ulang),
+ * lalu sesi di perangkat dihapus. Riwayat Papa di server tidak dihapus.
+ * Mengembalikan true jika reset di server berhasil.
+ */
 export async function logout() {
+  let serverReset = false;
+  try {
+    const fresh = await getAccessToken();
+    if (fresh) {
+      const response = await fetch(CONFIG.api.chatUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${fresh}` },
+        body: JSON.stringify({ action: 'logout' }),
+      });
+      serverReset = response.ok;
+    } else {
+      serverReset = true; // tidak ada sesi sah: tidak ada yang perlu direset
+    }
+  } catch {
+    serverReset = false;
+  }
   const token = session && session.access_token;
   clearSession();
   if (token) {
@@ -157,6 +178,7 @@ export async function logout() {
       /* token sudah dihapus di perangkat ini */
     }
   }
+  return serverReset;
 }
 
 /* ---------- UI di dalam Menu ---------- */
@@ -195,9 +217,11 @@ function bindUI() {
 
   ui.logoutBtn.addEventListener('click', async () => {
     ui.logoutBtn.disabled = true;
-    await logout();
+    const serverReset = await logout();
     ui.logoutBtn.disabled = false;
-    ui.message.textContent = 'Sudah keluar.';
+    ui.message.textContent = serverReset
+      ? 'Sudah keluar. Riwayat Papa tetap tersimpan.'
+      : 'Sudah keluar di perangkat ini, tetapi verifikasi di server belum bisa direset (jaringan). Masa aktifnya habis sendiri dalam maksimal 2 jam.';
   });
 
   updateUI();

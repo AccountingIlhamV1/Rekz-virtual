@@ -703,7 +703,7 @@ export class Controls {
   clearChat() {
     if (!this.chat) return;
     this.chat.clear();
-    this.toast('Riwayat percakapan dibersihkan.');
+    this.toast('Tampilan dibersihkan. Riwayat tetap tersimpan.');
   }
 
   updateLoader({ percent = 0, title, subtitle } = {}) {

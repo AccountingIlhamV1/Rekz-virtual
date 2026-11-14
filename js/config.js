@@ -12,7 +12,7 @@ const smallScreen = window.matchMedia('(max-width: 700px)').matches;
 export const CONFIG = Object.freeze({
   app: {
     name: 'Rekz Virtual',
-    version: '0.2.3',
+    version: '0.2.4',
     build: 'CHAMBER 01 / AI CHAT',
     storageKey: 'rekz-virtual:v1',
   },
@@ -42,7 +42,7 @@ export const CONFIG = Object.freeze({
   },
 
   api: {
-    /** Supabase Edge Function "rekz-chat" (General Mode, tanpa login). */
+    /** Supabase Edge Function "rekz-chat" (chat, riwayat Papa, logout). General Mode tanpa login. */
     chatUrl: 'https://xkqndsraohbvzkktobxt.supabase.co/functions/v1/rekz-chat',
     timeoutMs: 30000,
   },
